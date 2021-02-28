@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: static/images/uploads
+public_folder: /images/uploads
+
+display_url: https://example.com
+logo_url: https://example.com/images/logo.png
+
+collections:
+  - name: "content"
+    label: "Content"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "data"
+        label: "Data"
+        file: "cms/data.json"
+        fields:
+          - { name: "email", label: "Email", widget: "string" }
+          - { name: "facebook", label: "Facebook URL", widget: "string" }
+          - { name: "phone", label: "Phone Number", widget: "string" }
+          - {
+              name: "seoDescription",
+              label: "SEO Description",
+              widget: "string",
+            }
+          - { name: "seoTitle", label: "SEO Title", widget: "string" }
