@@ -11,9 +11,12 @@ body {
   }
 }
 
-.section-inverted {
-  background-color: $primary;
-  color: white;
+body {
+  overflow: visible !important;
+}
+
+.section-1 {
+  background-color: #e7eaea;
 }
 
 .hero-body {
@@ -31,6 +34,19 @@ body {
 .subtitle {
   color: #fff !important;
   font-size: 2rem;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+thead tr {
+  text-align: left;
+}
+thead tr th {
+  max-width: 60px;
+  vertical-align: bottom;
 }
 
 // .table {
