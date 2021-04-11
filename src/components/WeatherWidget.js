@@ -27,26 +27,9 @@ const WeatherWidget = () => {
     fetch(weatherUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setWeatherData(data);
       });
   }, []);
-
-  /*
-  clouds: 63
-  dew_point: -33.05
-  dt: 1612760400
-  feels_like: -34.9
-  humidity: 76
-  pop: 0
-  pressure: 1037
-  temp: -30.45
-  uvi: 0
-  visibility: 10000
-  weather: [Object] (1)
-  wind_deg: 241
-  wind_speed: 0.81
-  */
  
   const { current, hourly } = weatherData;
 
