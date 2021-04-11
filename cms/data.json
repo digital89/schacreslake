@@ -1,8 +1,13 @@
 {
-  "domainName": "example.com",
-  "email": "hello@example.com",
-  "facebook": "https://www.facebook.com/example",
+  "domainName": "schacreslake.com",
+  "email": "todd@schaferhomes.com",
   "phone": "(403) 123-4567",
+  "phoneRaw": "+14031234567",
   "seoDescription": "Lacombe's water ski lake.",
-  "seoTitle": "Schacres Lake"
+  "seoTitle": "Schacres Lake",
+  "heroTitle": "Welcome to Schacres Lake",
+  "heroSubtitle": "Waterskiing in Lacombe, Alberta!",
+  "heroCallUsButtonText": "Call Us: (403) 123-4567",
+  "heroEmailUsButtonText": "Email Us",
+  "contentIntro": "MY DREAM COMING TRUE. 20,000 m3 to go. I've had this dream for a lot of years to build a waterski lake, and the only thing better... now it's starting to come true. Check back to see how this crazy adventure is going."
 }

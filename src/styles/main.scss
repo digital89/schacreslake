@@ -20,10 +20,14 @@ body {
 }
 
 .hero-body {
-  background-image: url(https://images.unsplash.com/photo-1554004389-abf213c41d0d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2982&q=80);
+  background-image: url(/images/background-small-bw.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.hero-contact-button:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 
 .title {
@@ -37,7 +41,7 @@ body {
 }
 
 .table-container {
-  max-height: 400px;
+  max-height: 200px;
   overflow-y: scroll;
 }
 
@@ -58,3 +62,7 @@ thead tr th {
 //     text-align: left !important;
 //   }
 // }
+
+.weather-current {
+  font-size: 1.25rem;
+}

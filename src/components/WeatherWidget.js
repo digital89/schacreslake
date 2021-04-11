@@ -8,8 +8,20 @@ const units = "metric";
 const appId = "c82ea2d0a69af0208825c7c72f7de1ea";
 const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&units=${units}&appid=${appId}`;
 
+const degToCompass = (deg) => {
+  var val = Math.floor((deg / 22.5) + 0.5);
+  var dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  return dirs[(val % 16)];
+}
+
+const capitalizeFirstLetters = (sentence) => {
+  return sentence.split(' ').map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
+}
+
 const WeatherWidget = () => {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState({});
 
   useEffect(() => {
     fetch(weatherUrl)
@@ -35,10 +47,28 @@ const WeatherWidget = () => {
   wind_deg: 241
   wind_speed: 0.81
   */
+ 
+  const { current, hourly } = weatherData;
 
-  return (
-    <>
-      {weatherData ? (
+  if (current && hourly) {
+    return (
+      <>
+
+        <h4>Current:</h4>
+        <div className="weather-current">
+          {current.weather && current.weather[0] && current.weather[0].description
+            ? <div>{capitalizeFirstLetters(current.weather[0].description)}</div>
+            : null
+          }
+          <div>{current.temp}°C</div>
+          <div>Feels Like: {current.feels_like}°C</div>
+          <div>Humidity: {current.humidity}%</div>
+          <div>Wind: {degToCompass(current.wind_deg)} {current.wind_speed}km/h</div>
+        </div>
+
+        <br />
+
+        <h4>Hourly:</h4>
         <div className="table-container">
           <table className="table is-fullwidth">
             <thead>
@@ -52,7 +82,7 @@ const WeatherWidget = () => {
               </tr>
             </thead>
             <tbody>
-              {weatherData.hourly.map((hourly) => {
+              {hourly.map((hourly) => {
                 const date = new Date(hourly.dt * 1000);
                 return (
                   <tr>
@@ -61,17 +91,20 @@ const WeatherWidget = () => {
                     <td>{Math.round(hourly.feels_like)}</td>
                     <td>{`${Math.round(hourly.pop * 100)}%`}</td>
                     <td>{`${hourly.humidity}%`}</td>
-                    <td>{hourly.wind_speed}</td>
+                    <td>{degToCompass(current.wind_deg)} {hourly.wind_speed}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </>
+
+      </>
+    );
+  }
+
+  return (
+    <div>Loading...</div>
   );
 };
 
