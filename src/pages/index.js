@@ -82,7 +82,7 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section section-2">
           <div className="container content">
             <h2>Local Weather:</h2>
             <WeatherWidget />

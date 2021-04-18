@@ -27,31 +27,73 @@ const WeatherWidget = () => {
     fetch(weatherUrl)
       .then((response) => response.json())
       .then((data) => {
+        console.log('=== weather data');
+        console.log(data);
         setWeatherData(data);
       });
   }, []);
  
-  const { current, hourly } = weatherData;
+  const { current, daily } = weatherData;
 
-  if (current && hourly) {
+  if (current && daily) {
     return (
-      <>
+      <div>
 
         <h4>Current:</h4>
         <div className="weather-current">
-          {current.weather && current.weather[0] && current.weather[0].description
-            ? <div>{capitalizeFirstLetters(current.weather[0].description)}</div>
-            : null
-          }
-          <div>{current.temp}°C</div>
-          <div>Feels Like: {current.feels_like}°C</div>
-          <div>Humidity: {current.humidity}%</div>
-          <div>Wind: {degToCompass(current.wind_deg)} {current.wind_speed}km/h</div>
+          <div className="card">
+            <div className="card-content">
+              {current.weather && current.weather[0] && current.weather[0].icon
+                ? <div><img src={`http://openweathermap.org/img/w/${current.weather[0].icon}.png`} /></div>
+                : null
+              }
+              {current.weather && current.weather[0] && current.weather[0].description
+                ? <div>{capitalizeFirstLetters(current.weather[0].description)}</div>
+                : null
+              }
+              <div>{Math.round(current.temp)}°C</div>
+              <div>Feels Like: {Math.round(current.feels_like)}°C</div>
+              <div>Humidity: {current.humidity}%</div>
+              <div>Wind: {degToCompass(current.wind_deg)} {current.wind_speed}km/h</div>
+            </div>
+          </div>
         </div>
 
         <br />
 
-        <h4>Hourly:</h4>
+        <h4>Daily:</h4>
+        <div className="columns is-multiline">
+          {daily.map((day, index) => {
+            if (index === 0) return null; // not today
+
+            const date = new Date(day.dt * 1000);
+            return (
+              <div className={index < 4 ? "column is-one-third" : "column is-one-quarter"}>
+                <div className="card">
+                  <div className="card-content">
+                    <div style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+                      <b>{dayjs(date.toUTCString()).format('ddd, MMM DD')}</b>
+                    </div>
+                    {day.weather && day.weather[0] && day.weather[0].icon
+                      ? <div><img src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`} /></div>
+                      : null
+                    }
+                    {day.weather && day.weather[0] && day.weather[0].description
+                      ? <div>{capitalizeFirstLetters(day.weather[0].description)}</div>
+                      : null
+                    }
+                    <div>{Math.round(day.temp.max)}°C / {Math.round(day.temp.min)}°C</div>
+                    <div>POP: {`${Math.round(day.pop * 100)}%`}</div>
+                    <div>Humidity: {`${day.humidity}%`}</div>
+                    <div>Wind: {degToCompass(day.wind_deg)} {day.wind_speed}km/h</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* <h4>Hourly:</h4>
         <div className="table-container">
           <table className="table is-fullwidth">
             <thead>
@@ -74,15 +116,15 @@ const WeatherWidget = () => {
                     <td>{Math.round(hourly.feels_like)}</td>
                     <td>{`${Math.round(hourly.pop * 100)}%`}</td>
                     <td>{`${hourly.humidity}%`}</td>
-                    <td>{degToCompass(current.wind_deg)} {hourly.wind_speed}</td>
+                    <td>{degToCompass(hourly.wind_deg)} {hourly.wind_speed}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-        </div>
+        </div> */}
 
-      </>
+      </div>
     );
   }
 
