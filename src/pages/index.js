@@ -71,7 +71,7 @@ const IndexPage = () => {
             <div>
               <h2>Book a time slot:</h2>
               <InlineWidget
-                url="https://calendly.com/digital89"
+                url="https://calendly.com/schacreslake"
                 styles={{
                   height: "630px",
                   // maxWidth: "100px",
