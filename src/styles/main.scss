@@ -61,16 +61,28 @@ thead tr th {
   vertical-align: bottom;
 }
 
-// .table {
-//   background-color: $primary;
-//   color: white;
-
-//   th {
-//     color: white !important;
-//     text-align: left !important;
-//   }
-// }
-
 .weather-current {
   font-size: 1.25rem;
+}
+
+.gallery-container {
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.gallery-item-image {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.modal-title {
+  color: white;
+  padding: 1rem;
+  text-align: center;
 }

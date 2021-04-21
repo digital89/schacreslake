@@ -192,7 +192,7 @@ const IndexPage = () => {
           <div className="container content">
             <h2>Gallery</h2>
 
-            <div id="gallery-container">
+            <div id="gallery-container" className="gallery-container">
               {galleryItems.map(({
                 image: galleryItemImageSrc,
                 title: galleryItemTitle,
