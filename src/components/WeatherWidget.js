@@ -42,7 +42,11 @@ const WeatherWidget = () => {
           <div className="card">
             <div className="card-content">
               {current.weather && current.weather[0] && current.weather[0].icon
-                ? <div><img src={`http://openweathermap.org/img/w/${current.weather[0].icon}.png`} /></div>
+                ? (
+                  <div>
+                    <img src={`https://openweathermap.org/img/w/${current.weather[0].icon}.png`} alt="Weather Icon" />
+                  </div>
+                )
                 : null
               }
               {current.weather && current.weather[0] && current.weather[0].description
@@ -73,7 +77,11 @@ const WeatherWidget = () => {
                       <b>{dayjs(date.toUTCString()).format('ddd, MMM DD')}</b>
                     </div>
                     {day.weather && day.weather[0] && day.weather[0].icon
-                      ? <div><img src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`} /></div>
+                      ? (
+                        <div>
+                          <img src={`https://openweathermap.org/img/w/${day.weather[0].icon}.png`} alt="Weather Icon" />
+                        </div>
+                      )
                       : null
                     }
                     {day.weather && day.weather[0] && day.weather[0].description

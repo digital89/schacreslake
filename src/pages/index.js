@@ -170,6 +170,7 @@ const IndexPage = () => {
           <div className="container content">
             <h2>Location:</h2>
             <iframe
+              title="Bookings Widget"
               allowFullScreen
               frameBorder="0"
               loading="lazy"
