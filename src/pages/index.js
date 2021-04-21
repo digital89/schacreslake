@@ -134,7 +134,8 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section id="booking" className="section section-1">
+        <section id="booking" className="section-invisible" />
+        <section className="section section-1">
           <div className="container content">
             <div>
               <h2>Book a time slot:</h2>
@@ -150,7 +151,8 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section id="pricing" className="section">
+        <section id="pricing" className="section-invisible" />
+        <section className="section">
           <div className="container content">
             <h2>Pricing:</h2>
             <div
@@ -160,14 +162,16 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section id="weather" className="section section-2">
+        <section id="weather" className="section-invisible" />
+        <section className="section section-2">
           <div className="container content">
             <h2>Local Weather:</h2>
             <WeatherWidget />
           </div>
         </section>
 
-        <section id="location" className="section">
+        <section id="location" className="section-invisible" />
+        <section className="section">
           <div className="container content">
             <h2>Location:</h2>
             <iframe
@@ -190,7 +194,8 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section id="gallery" className="section">
+        <section id="gallery" className="section-invisible" />
+        <section className="section">
           <div className="container content">
             <h2>Gallery</h2>
 
