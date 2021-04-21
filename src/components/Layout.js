@@ -14,8 +14,8 @@ const Layout = ({ children }) => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
 
-        <meta name="author" content="Echo Lacombe" />
-        <meta name="copyright" content="© Echo Lacombe" />
+        <meta name="author" content="Schacres Lake" />
+        <meta name="copyright" content="© Schacres Lake" />
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
