@@ -18,6 +18,7 @@ import {
 import Layout from "../components/Layout";
 import WeatherWidget from "../components/WeatherWidget";
 import styles from '../styles';
+import { useSmallImage } from '../utilities';
 
 const Macy = typeof window !== 'undefined' ? require('macy') : null
 
@@ -170,7 +171,7 @@ const IndexPage = () => {
           <div className="container content">
             <h2>Location:</h2>
             <iframe
-              title="Bookings Widget"
+              title="Map Widget"
               allowFullScreen
               frameBorder="0"
               loading="lazy"
@@ -210,7 +211,7 @@ const IndexPage = () => {
                 >
                   <img
                     className="gallery-item-image"
-                    src={galleryItemImageSrc}
+                    src={useSmallImage(galleryItemImageSrc)}
                     alt={galleryItemTitle}
                   />
                 </div>
