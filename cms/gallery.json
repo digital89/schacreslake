@@ -1,7 +1,19 @@
 {
   "items": [
     {
-      "title": "Example Image",
+      "title": "Example 1",
+      "image": "/images/uploads/background-small.jpg"
+    },
+    {
+      "title": "Example 2",
+      "image": "/images/uploads/background-small.jpg"
+    },
+    {
+      "title": "Example 3",
+      "image": "/images/uploads/background-small.jpg"
+    },
+    {
+      "title": "Example 4",
       "image": "/images/uploads/background-small.jpg"
     }
   ]
