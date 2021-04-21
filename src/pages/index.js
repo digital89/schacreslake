@@ -23,7 +23,7 @@ const IndexPage = () => {
               <div className="container">
                 <div className="navbar-brand">
                   <a className="navbar-item">
-                    <img src="/images/logo.svg" alt="Logo" />
+                    <img src="/images/logo-brand.svg" alt="Logo" />
                   </a>
                 </div>
                 {/* <div className="navbar-menu">
@@ -113,20 +113,18 @@ const IndexPage = () => {
 
         <footer className="footer">
           <div className="content has-text-centered">
-            <p>
-              <div>
-                <span>© Schacres Lake</span>
-                <span> - </span>
-                <a
-                  href="https://digital89.com"
-                  title="Website by Digital89"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Website by <strong>Digital89</strong>
-                </a>
-              </div>
-            </p>
+            <div>
+              <span>© Schacres Lake</span>
+              <span> - </span>
+              <a
+                href="https://digital89.com"
+                title="Website by Digital89"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Website by <strong>Digital89</strong>
+              </a>
+            </div>
           </div>
         </footer>
       </Layout>

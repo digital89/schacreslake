@@ -27,8 +27,6 @@ const WeatherWidget = () => {
     fetch(weatherUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log('=== weather data');
-        console.log(data);
         setWeatherData(data);
       });
   }, []);
@@ -65,10 +63,10 @@ const WeatherWidget = () => {
         <div className="columns is-multiline">
           {daily.map((day, index) => {
             if (index === 0) return null; // not today
-
+            
             const date = new Date(day.dt * 1000);
             return (
-              <div className={index < 4 ? "column is-one-third" : "column is-one-quarter"}>
+              <div key={index} className={index < 4 ? "column is-one-third" : "column is-one-quarter"}>
                 <div className="card">
                   <div className="card-content">
                     <div style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
