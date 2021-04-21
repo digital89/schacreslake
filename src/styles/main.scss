@@ -38,6 +38,10 @@ body {
   border-bottom: 1px solid gray;
 }
 
+.navbar-item img {
+  max-height: 2.5rem;
+}
+
 .hero-body {
   background-image: url(/images/background-small-bw.jpg);
   background-size: cover;
