@@ -27,6 +27,11 @@ body {
   }
 }
 
+.hero .navbar {
+  background: white;
+  border-bottom: 1px solid gray;
+}
+
 .hero-body {
   background-image: url(/images/background-small-bw.jpg);
   background-size: cover;

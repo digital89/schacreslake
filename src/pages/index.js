@@ -18,7 +18,7 @@ import {
 import Layout from "../components/Layout";
 import WeatherWidget from "../components/WeatherWidget";
 import styles from '../styles';
-import { useSmallImage } from '../utilities';
+import { imagePathToSmallImagePath } from '../utilities';
 
 const Macy = typeof window !== 'undefined' ? require('macy') : null
 
@@ -78,7 +78,7 @@ const IndexPage = () => {
         <section className="hero is-medium">
           <div className="hero-head">
             
-            <nav className="navbar" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
               <div className="container">
                 <div className="navbar-brand">
                   <span className="navbar-item">
@@ -211,7 +211,7 @@ const IndexPage = () => {
                 >
                   <img
                     className="gallery-item-image"
-                    src={useSmallImage(galleryItemImageSrc)}
+                    src={imagePathToSmallImagePath(galleryItemImageSrc)}
                     alt={galleryItemTitle}
                   />
                 </div>

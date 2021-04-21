@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Helmet>
-        <html lang="en" />
+        <html lang="en" className="has-navbar-fixed-top" />
 
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
