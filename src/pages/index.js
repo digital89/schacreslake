@@ -1,8 +1,10 @@
-import * as React from "react";
-import { InlineWidget } from "react-calendly";
+import React, { useEffect, useRef, useState } from 'react';
+import { InlineWidget } from 'react-calendly';
+import classNames from 'classnames'
 
 import {
   contentIntro,
+  contentPricing,
   email,
   heroCallUsButtonText,
   heroEmailUsButtonText,
@@ -10,36 +12,101 @@ import {
   heroTitle,
   phoneRaw,
 } from '../../cms/data';
+import {
+  items as galleryItems,
+} from '../../cms/gallery'
 import Layout from "../components/Layout";
 import WeatherWidget from "../components/WeatherWidget";
+import styles from '../styles';
+
+const Macy = typeof window !== 'undefined' ? require('macy') : null
 
 const IndexPage = () => {
+  const gallery = useRef(null);
+  const [selectedImage, setSelectedImage] = useState();
+
+  useEffect(() => {
+    window.document.addEventListener('keydown', handleKeydown, false);
+
+    if (typeof window !== 'undefined') {
+      const macy = new Macy({
+        container: '#gallery-container',
+        columns: 4,
+        margin: {
+          y: 15,
+          x: 15,
+        },
+        breakAt: {
+          [styles.sizes.widescreen]: 4,
+          [styles.sizes.desktop]: 3,
+          [styles.sizes.tablet]: 2,
+          [styles.sizes.phone]: 1,
+        },
+      });
+
+      gallery.current = macy;
+    }
+  }, []);
+
+  const handleKeydown = (event) => {
+    if (event.keyCode === 27) {
+      setSelectedImage(null);
+    }
+  }
+
+  const handleClickImage = (imageObject) => {
+    setSelectedImage(imageObject);
+  };
+
+  const handleClickModalClose = () => {
+    setSelectedImage(null);
+  };
+
+  const handleBurgerClick = (event) => {
+    const burger = window.document.querySelector('.navbar-burger');
+    const menu = window.document.querySelector('.navbar-menu');
+    if (burger && menu) {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    }
+  };
+
   return (
     <>
       <Layout>
         <section className="hero is-medium">
           <div className="hero-head">
-            <nav className="navbar">
+            
+            <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="container">
                 <div className="navbar-brand">
                   <a className="navbar-item">
                     <img src="/images/logo-brand.svg" alt="Logo" />
                   </a>
+                  <a
+                    role="button"
+                    className="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    onClick={handleBurgerClick}
+                  >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                  </a>
                 </div>
-                {/* <div className="navbar-menu">
+                <div className="navbar-menu">
                   <div className="navbar-end">
-                    <a className="navbar-item is-active">Home</a>
-                    <a className="navbar-item">About</a>
-                    <a className="navbar-item">Contact</a>
-                    <span className="navbar-item">
-                      <a className="button is-primary">
-                        <span>(403) 123-4567</span>
-                      </a>
-                    </span>
+                    <a className="navbar-item" href="#booking">Booking</a>
+                    <a className="navbar-item" href="#pricing">Pricing</a>
+                    <a className="navbar-item" href="#weather">Weather</a>
+                    <a className="navbar-item" href="#location">Getting Here</a>
+                    <a className="navbar-item" href="#gallery">Gallery</a>
                   </div>
-                </div> */}
+                </div>
               </div>
             </nav>
+
           </div>
 
           <div className="hero-body">
@@ -66,7 +133,7 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section className="section section-1">
+        <section id="booking" className="section section-1">
           <div className="container content">
             <div>
               <h2>Book a time slot:</h2>
@@ -82,14 +149,24 @@ const IndexPage = () => {
           </div>
         </section>
 
-        <section className="section section-2">
+        <section id="pricing" className="section">
+          <div className="container content">
+            <h2>Pricing:</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: contentPricing }}
+              style={{ whiteSpace: 'pre-wrap' }}
+            />
+          </div>
+        </section>
+
+        <section id="weather" className="section section-2">
           <div className="container content">
             <h2>Local Weather:</h2>
             <WeatherWidget />
           </div>
         </section>
 
-        <section className="section">
+        <section id="location" className="section">
           <div className="container content">
             <h2>Location:</h2>
             <iframe
@@ -107,6 +184,63 @@ const IndexPage = () => {
               }}
               title="Google Maps View"
             />
+
+          </div>
+        </section>
+
+        <section id="gallery" className="section">
+          <div className="container content">
+            <h2>Gallery</h2>
+
+            <div id="gallery-container">
+              {galleryItems.map(({
+                image: galleryItemImageSrc,
+                title: galleryItemTitle,
+              }) => (
+                <div
+                  className="gallery-item"
+                  key={galleryItemTitle}
+                  onClick={() => {
+                    handleClickImage({
+                      src: galleryItemImageSrc,
+                      title: galleryItemTitle,
+                    })
+                  }}
+                >
+                  <img
+                    className="gallery-item-image"
+                    src={galleryItemImageSrc}
+                    alt={galleryItemTitle}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {selectedImage && (
+              <div
+                className={classNames(
+                  'modal',
+                  selectedImage ? 'is-active' : null,
+                )}
+              >
+                <div
+                  className="modal-background"
+                  onClick={handleClickModalClose}
+                />
+                <div className="modal-content">
+                  <div className="modal-title">{selectedImage.title}</div>
+                  <p className="image">
+                    <img src={selectedImage.src} alt={selectedImage.title} />
+                  </p>
+                </div>
+                <button
+                  className="modal-close is-large"
+                  onClick={handleClickModalClose}
+                  aria-label="close"
+                  type="button"
+                />
+              </div>
+            )}
 
           </div>
         </section>

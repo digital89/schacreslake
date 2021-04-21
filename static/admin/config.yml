@@ -5,8 +5,8 @@ backend:
 media_folder: static/images/uploads
 public_folder: /images/uploads
 
-display_url: https://example.com
-logo_url: https://example.com/images/logo.png
+display_url: https://schacreslake.com
+logo_url: https://schacreslake.com/images/logo-brand.png
 
 collections:
   - name: "content"
@@ -30,3 +30,15 @@ collections:
           - { name: "heroCallUsButtonText", label: "Hero Call Us Button Text", widget: "string" }
           - { name: "heroEmailUsButtonText", label: "Hero Email Us Button Text", widget: "string" }
           - { name: "contentIntro", label: "Content Intro", widget: "text" }
+      
+      - name: "gallery"
+        label: "Gallery"
+        file: "cms/gallery.json"
+        fields:
+          - name: "items"
+            label: "Gallery Items"
+            label_singular: "Gallery Item"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Gallery Item Title", widget: "string" }
+              - { name: "image", label: "Gallery Item Image", widget: "image" }
