@@ -23,6 +23,9 @@ const Layout = ({ children }) => {
         <meta name="googlebot" content="index, follow" />
 
         <link rel="canonical" href={`https://${domainName}`} />
+
+        <link rel="apple-touch-icon" sizes="192x192" href="/images/icon-192-192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Helmet>
 
       {children}
