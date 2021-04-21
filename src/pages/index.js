@@ -80,9 +80,9 @@ const IndexPage = () => {
             <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="container">
                 <div className="navbar-brand">
-                  <a className="navbar-item">
+                  <span className="navbar-item">
                     <img src="/images/logo-brand.svg" alt="Logo" />
-                  </a>
+                  </span>
                   <a
                     role="button"
                     className="navbar-burger"
