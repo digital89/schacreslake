@@ -55,6 +55,15 @@ const IndexPage = () => {
     }
   }
 
+  const handleClickNavbarItem = () => {
+    const burger = window.document.querySelector('.navbar-burger');
+    const menu = window.document.querySelector('.navbar-menu');
+    if (burger && menu) {
+      burger.classList.remove('is-active');
+      menu.classList.remove('is-active');
+    }
+  }
+
   const handleClickImage = (imageObject) => {
     setSelectedImage(imageObject);
   };
@@ -63,7 +72,7 @@ const IndexPage = () => {
     setSelectedImage(null);
   };
 
-  const handleBurgerClick = (event) => {
+  const handleBurgerClick = () => {
     const burger = window.document.querySelector('.navbar-burger');
     const menu = window.document.querySelector('.navbar-menu');
     if (burger && menu) {
@@ -98,11 +107,11 @@ const IndexPage = () => {
                 </div>
                 <div className="navbar-menu">
                   <div className="navbar-end">
-                    <a className="navbar-item" href="#booking">Booking</a>
-                    <a className="navbar-item" href="#pricing">Pricing</a>
-                    <a className="navbar-item" href="#weather">Weather</a>
-                    <a className="navbar-item" href="#location">Getting Here</a>
-                    <a className="navbar-item" href="#gallery">Gallery</a>
+                    <a className="navbar-item" onClick={handleClickNavbarItem} href="#booking">Booking</a>
+                    <a className="navbar-item" onClick={handleClickNavbarItem} href="#pricing">Pricing</a>
+                    <a className="navbar-item" onClick={handleClickNavbarItem} href="#weather">Weather</a>
+                    <a className="navbar-item" onClick={handleClickNavbarItem} href="#location">Getting Here</a>
+                    <a className="navbar-item" onClick={handleClickNavbarItem} href="#gallery">Gallery</a>
                   </div>
                 </div>
               </div>
