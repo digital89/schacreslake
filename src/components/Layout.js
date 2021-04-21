@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 
         <link rel="canonical" href={`https://${domainName}`} />
 
-        <link rel="apple-touch-icon" sizes="192x192" href="/images/icon-192-192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-180-180.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </Helmet>
 
