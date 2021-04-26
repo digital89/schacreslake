@@ -29,6 +29,7 @@ collections:
           - { name: "heroSubtitle", label: "Hero Subtitle", widget: "string" }
           - { name: "heroCallUsButtonText", label: "Hero Call Us Button Text", widget: "string" }
           - { name: "heroEmailUsButtonText", label: "Hero Email Us Button Text", widget: "string" }
+          - { name: "heroBackgroundImage", label: "Hero Background Image", widget: "image" }
           - { name: "contentIntro", label: "Content Intro", widget: "text" }
           - { name: "contentPricing", label: "Content Pricing", widget: "text" }
       

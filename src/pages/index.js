@@ -6,6 +6,7 @@ import {
   contentIntro,
   contentPricing,
   email,
+  heroBackgroundImage,
   heroCallUsButtonText,
   heroEmailUsButtonText,
   heroSubtitle,
@@ -119,7 +120,12 @@ const IndexPage = () => {
 
           </div>
 
-          <div className="hero-body">
+          <div
+            className="hero-body"
+            style={{
+              backgroundImage: `url(${heroBackgroundImage})`,
+            }}
+          >
             <div className="container">
               <h1 className="title">{heroTitle}</h1>
               <h2 className="subtitle">{heroSubtitle}</h2>
