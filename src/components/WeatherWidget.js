@@ -99,37 +99,6 @@ const WeatherWidget = () => {
           })}
         </div>
 
-        {/* <h4>Hourly:</h4>
-        <div className="table-container">
-          <table className="table is-fullwidth">
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>°C</th>
-                <th>Feels Like (°C)</th>
-                <th>POP</th>
-                <th>Humidity</th>
-                <th>Wind (km/h)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {hourly.map((hourly) => {
-                const date = new Date(hourly.dt * 1000);
-                return (
-                  <tr>
-                    <td>{dayjs(date.toUTCString()).format('ddd, MMM DD, h:mma')}</td>
-                    <td>{Math.round(hourly.temp)}</td>
-                    <td>{Math.round(hourly.feels_like)}</td>
-                    <td>{`${Math.round(hourly.pop * 100)}%`}</td>
-                    <td>{`${hourly.humidity}%`}</td>
-                    <td>{degToCompass(hourly.wind_deg)} {hourly.wind_speed}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div> */}
-
       </div>
     );
   }
