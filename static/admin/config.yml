@@ -30,7 +30,7 @@ collections:
           - { name: "heroCallUsButtonText", label: "Hero Call Us Button Text", widget: "string" }
           - { name: "heroEmailUsButtonText", label: "Hero Email Us Button Text", widget: "string" }
           - { name: "heroBackgroundImage", label: "Hero Background Image", widget: "image" }
-          - { name: "heroTextColor", label: "Hero Text Colour", widget: "color", allowInput: true, enableAlpha: false }
+          - { name: "heroTextColor", label: "Hero Text Colour", widget: "color" }
           - { name: "contentIntro", label: "Content Intro", widget: "text" }
           - { name: "contentPricing", label: "Content Pricing", widget: "text" }
       
