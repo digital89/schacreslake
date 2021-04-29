@@ -55,18 +55,12 @@ body {
 
 .title {
   font-size: 3rem;
+  // color: #fff !important;
 }
 
 .subtitle {
   font-size: 2rem;
-}
-
-.title, .subtitle {
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 4px;
-  color: #fff !important;
-  display: inline-block;
-  padding: 0.5rem 1rem;
+  // color: #fff !important;
 }
 
 .weather-current {

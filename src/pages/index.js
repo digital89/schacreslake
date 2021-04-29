@@ -10,6 +10,7 @@ import {
   heroCallUsButtonText,
   heroEmailUsButtonText,
   heroSubtitle,
+  heroTextColor,
   heroTitle,
   phoneRaw,
 } from '../../cms/data';
@@ -127,8 +128,20 @@ const IndexPage = () => {
             }}
           >
             <div className="container">
-              <h1 className="title">{heroTitle}</h1>
-              <h2 className="subtitle">{heroSubtitle}</h2>
+
+              <h1
+                className="title"
+                style={heroTextColor ? { color: heroTextColor } : {}}
+              >
+                {heroTitle}
+              </h1>
+              <h2
+                className="subtitle"
+                style={heroTextColor ? { color: heroTextColor } : {}}
+              >
+                {heroSubtitle}
+              </h2>
+
               <div className="hero-contact-button">
                 <a className="button is-medium" href={`tel:${phoneRaw}`}>
                   <strong>{heroCallUsButtonText}</strong>
