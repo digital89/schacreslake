@@ -24,6 +24,19 @@ import { imagePathToSmallImagePath } from '../utilities';
 
 const Macy = typeof window !== 'undefined' ? require('macy') : null
 
+const urlify = (text) => {
+  const regex = /(https?:\/\/[^\s]+)/gi
+  return text.replace(regex, match => (
+    `<a href="${match}" target="_blank" rel="noopener noreferrer">${match}</a>`
+  ))
+}
+
+const emailify = (text) => {
+  // eslint-disable-next-line no-useless-escape
+  const regex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@[*[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+]*/gi
+  return text.replace(regex, match => `<a href="mailto:${match}">${match}</a>`)
+}
+
 const IndexPage = () => {
   const gallery = useRef(null);
   const [selectedImage, setSelectedImage] = useState();
@@ -184,8 +197,8 @@ const IndexPage = () => {
           <div className="container content">
             <h2>Pricing:</h2>
             <div
-              dangerouslySetInnerHTML={{ __html: contentPricing }}
-              style={{ whiteSpace: 'pre-wrap' }}
+              dangerouslySetInnerHTML={{ __html: emailify(urlify(contentPricing)) }}
+              style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
             />
           </div>
         </section>
