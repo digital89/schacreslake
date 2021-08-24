@@ -5,7 +5,7 @@ const lat = 52.480818160508875;
 const lon = -113.76193404392085;
 const exclude = "minutely,alerts";
 const units = "metric";
-const appId = "c82ea2d0a69af0208825c7c72f7de1ea";
+const appId = "c82ea2d0a69af0208825c7c72f7de1ea"; // why not 5bca96bb956e90db72d3ac387021df1b ?
 const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&units=${units}&appid=${appId}`;
 
 const degToCompass = (deg) => {

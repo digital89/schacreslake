@@ -18,7 +18,7 @@ import {
   items as galleryItems,
 } from '../../cms/gallery'
 import Layout from "../components/Layout";
-import WeatherWidget from "../components/WeatherWidget";
+import WeatherWidget from "../components/WeatherWidgetClimaCell";
 import styles from '../styles';
 import { imagePathToSmallImagePath } from '../utilities';
 
