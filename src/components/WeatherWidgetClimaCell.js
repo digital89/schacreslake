@@ -108,7 +108,7 @@ const WeatherWidget = () => {
                       <span>({Math.round(day.precipitationIntensity * 100) / 100}mm/hr)</span>
                     </div>
                     <div><b>Humidity:</b> {`${Math.round(day.humidity)}%`}</div>
-                    <div><b>Wind:</b> {degToCompass(current.windDirection)} {Math.round(current.windSpeed)}km/h (Gusts of {Math.round(current.windGust)}km/h)</div>
+                    <div><b>Wind:</b> {degToCompass(day.windDirection)} {Math.round(day.windSpeed)}km/h (Gusts of {Math.round(day.windGust)}km/h)</div>
                     <div><b>Cloud Cover:</b> {Math.round(day.cloudCover)}%</div>
                   </div>
                 </div>
