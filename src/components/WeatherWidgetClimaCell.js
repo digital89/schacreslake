@@ -75,7 +75,7 @@ const WeatherWidget = () => {
               <div><b>Temp:</b> {Math.round(current.temperatureMax)}°C</div>
               <div><b>Feels Like:</b> {Math.round(current.temperatureApparent)}°C</div>
               <div><b>Humidity:</b> {Math.round(current.humidity)}%</div>
-              <div><b>Wind:</b> {degToCompass(current.windDirection)} {Math.round(current.windSpeed)}km/h (Gusts of {Math.round(current.windGust)}km/h)</div>
+              <div><b>Wind:</b> {degToCompass(current.windDirection)} {Math.round(current.windSpeed * 10) / 10}km/h (Gusts of {Math.round(current.windGust * 10) / 10}km/h)</div>
               <div><b>Cloud Cover:</b> {current.cloudCover}%</div>
             </div>
           </div>
@@ -105,10 +105,10 @@ const WeatherWidget = () => {
                         : null
                       }
                       <span> </span>
-                      <span>({Math.round(day.precipitationIntensity * 100) / 100}mm/hr)</span>
+                      <span>({Math.round(day.precipitationIntensity * 10) / 10}mm/hr)</span>
                     </div>
                     <div><b>Humidity:</b> {`${Math.round(day.humidity)}%`}</div>
-                    <div><b>Wind:</b> {degToCompass(day.windDirection)} {Math.round(day.windSpeed)}km/h (Gusts of {Math.round(day.windGust)}km/h)</div>
+                    <div><b>Wind:</b> {degToCompass(day.windDirection)} {Math.round(day.windSpeed * 10) / 10}km/h (Gusts of {Math.round(day.windGust * 10) / 10}km/h)</div>
                     <div><b>Cloud Cover:</b> {Math.round(day.cloudCover)}%</div>
                   </div>
                 </div>
