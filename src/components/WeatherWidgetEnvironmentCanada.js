@@ -13,10 +13,10 @@ const WeatherWidget = () => {
     console.log('=== HERE 0')
     setLoading(true);
 
-    axios.get('/.netlify/functions/weather').then(response => {
-      console.log('=== HERE 1');
-      console.log(response);
-    });
+    // axios.get('https://schacreslake.com/.netlify/functions/weather').then(response => {
+    //   console.log('=== HERE 1');
+    //   console.log(response);
+    // });
 
     // fetch(weatherUrl)
     //   .then((response) => response.text())
