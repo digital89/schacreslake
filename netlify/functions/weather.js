@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 exports.handler = async function(event, context) {
   const { data } = await axios.get('https://weather.gc.ca/rss/city/ab-39_e.xml');
