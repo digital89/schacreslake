@@ -12,7 +12,7 @@ const degToCompass = (deg) => {
   var val = Math.floor((deg / 22.5) + 0.5);
   var dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   return dirs[(val % 16)];
-}
+};
 
 const precipitationTypes = {
   // 0: 'N/A',

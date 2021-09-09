@@ -67,6 +67,17 @@ body {
   font-size: 1.25rem;
 }
 
+.weather-card {
+  height: 100%;
+}
+.weather-card-icon {
+  height: 3rem;
+  width: 3rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+
 .gallery-container {
   margin-top: 2rem;
 }

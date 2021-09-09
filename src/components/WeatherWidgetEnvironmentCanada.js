@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import dayjs from 'dayjs';
-
-const weatherUrl = 'https://weather.gc.ca/rss/city/ab-39_e.xml';
 
 const WeatherWidget = () => {
   const [error, setError] = useState(false);
@@ -10,33 +7,54 @@ const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState({});
 
   useEffect(() => {
-    console.log('=== HERE 0')
     setLoading(true);
 
-    // axios.get('https://schacreslake.com/.netlify/functions/weather').then(response => {
-    //   console.log('=== HERE 1');
-    //   console.log(response);
-    // });
+    try {
+      axios.get('https://schacreslake.com/.netlify/functions/weather').then(({ data }) => {
+        setLoading(false);
+  
+        // console.log(data);
 
-    // fetch(weatherUrl)
-    //   .then((response) => response.text())
-    //   .then((xml) => {
-    //     setLoading(false);
+        const { siteData: { currentConditions, dateTime, forecastGroup, riseSet } } = data;
+        const dateTimeObj = dateTime?.[1];
+        const date = new Date(`${dateTimeObj?.month?.name} ${dateTimeObj?.day?.$t}, ${dateTimeObj?.year}`);
+  
+        setWeatherData({
+          current: {
+            dewpoint: currentConditions?.dewpoint?.$t,
+            humidity: currentConditions?.relativeHumidity?.$t,
+            pressure: currentConditions?.pressure?.$t,
+            sunrise: `${riseSet?.dateTime[1]?.hour}:${riseSet?.dateTime[1]?.minute}`,
+            sunset: `${riseSet?.dateTime[3]?.hour}:${riseSet?.dateTime[3]?.minute}`,
+            temperature: currentConditions?.temperature?.$t,
+            windDirection: currentConditions?.wind?.direction,
+            windGust: currentConditions?.wind?.gust?.$t || 0,
+            windSpeed: currentConditions?.wind?.speed?.$t,
+          },
+          daily: forecastGroup?.forecast?.map((day, index) => {
+            const newDate = new Date(date);
+            newDate.setDate(newDate.getDate() + index);
 
-    //     console.log('=== HERE 1')
-    //     console.log(xml);
-
-    //     setWeatherData({
-    //       current: json.data.timelines[0].intervals[0].values,
-    //       daily: json.data.timelines[1].intervals.slice(0, 9).map(day => ({
-    //         startTime: day.startTime,
-    //         ...day.values,
-    //       }))
-    //     });
-    //   });
+            return {
+              iconFormat: day?.abbreviatedForecast?.iconCode?.format,
+              iconNumber: day?.abbreviatedForecast?.iconCode?.$t,
+              forecastName: day?.period?.textForecastName,
+              humidity: day?.relativeHumidity?.$t,
+              summary: day?.textSummary,
+              temperature: day?.temperatures?.temperature?.$t,
+              uvSummary: day?.uv?.textSummary,
+              windSummary: day?.winds.textSummary,
+            };
+          }),
+        });
+      });
+    } catch (error) {
+      setError(error);
+    }
   }, []);
  
-  const { current, daily } = weatherData;
+  const { current, daily, timeStamp } = weatherData;
+  console.log({ current, daily, timeStamp });
 
   if (loading) {
     return (
@@ -46,66 +64,82 @@ const WeatherWidget = () => {
 
   if (error) {
     return (
-      <div style={{ color: 'white' }}>Fetch rate limit reached for weather data source...</div>
+      <div style={{ color: 'white' }}>Oops! There was an issue fetching weather data...</div>
     )
   }
 
   if (current && daily) {
     return (
-      <div>temp</div>
+      <div>
 
-      // <div>
+        <h4>Current:</h4>
+        <div className="weather-current">
+          <div className="card">
+            <div className="card-content">
+              <div><b>Temp:</b> {current.temperature}°C</div>
+              <div><b>Wind:</b> {current.windDirection} {current.windSpeed}km/h (Gusts of {current.windGust}km/h)</div>
+              <div><b>Humidity:</b> {current.humidity}%</div>
+              <div><b>Pressure:</b> {current.pressure}kPa</div>
+              <div><b>Dewpoint:</b> {current.dewpoint}°C</div>
+              <div><b>Sunrise/set:</b> {current.sunrise}↑ {current.sunset}↓</div>
+            </div>
+          </div>
+        </div>
 
-      //   <h4>Current:</h4>
-      //   <div className="weather-current">
-      //     <div className="card">
-      //       <div className="card-content">
-      //         <div><b>Temp:</b> {Math.round(current.temperatureMax)}°C</div>
-      //         <div><b>Feels Like:</b> {Math.round(current.temperatureApparent)}°C</div>
-      //         <div><b>Humidity:</b> {Math.round(current.humidity)}%</div>
-      //         <div><b>Wind:</b> {degToCompass(current.windDirection)} {Math.round(current.windSpeed * 10) / 10}km/h (Gusts of {Math.round(current.windGust * 10) / 10}km/h)</div>
-      //         <div><b>Cloud Cover:</b> {current.cloudCover}%</div>
-      //       </div>
-      //     </div>
-      //   </div>
+        <br />
 
-      //   <br />
+        <h4>Daily:</h4>
+        <div className="columns is-multiline">
+          {daily.map((day, index) => {
+            return (
+              <div key={index} className="column is-half">
+                <div className="card weather-card">
+                  <div className="card-content">
+                    {/* <div style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
+                      <b>{dayjs(day.date.toUTCString()).format('ddd, MMM DD')}</b>
+                    </div> */}
+                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>{day.forecastName}</div>
+                    {day.iconNumber && day.iconFormat
+                      ? (
+                        <div className="weather-card-icon">
+                          <img src={`https://weather.gc.ca/weathericons/${day.iconNumber}.${day.iconFormat}`} alt="Weather Icon" />
+                        </div>
+                      )
+                      : null
+                    }
+                    <div
+                      style={{
+                        fontSize: '1.25rem',
+                        marginBottom: '0.5rem',
+                        textDecoration: 'underline',
+                      }}
+                    >{day.temperature}°C</div>
+                    <div style={{ marginBottom: '0.5rem' }}>{day.summary}</div>
+                    <div><b>Humidity:</b> {day.humidity}%</div>
+                    {day.windSummary ? (
+                      <div><b>Wind:</b> {day.windSummary}</div>
+                    ): null}
+                    {day.uvSummary ? (
+                      <div><b>UV:</b> {day.uvSummary}</div>
+                    ): null}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-      //   <h4>Daily:</h4>
-      //   <div className="columns is-multiline">
-      //     {daily.map((day, index) => {
-      //       const date = new Date(day.startTime);
-      //       return (
-      //         <div key={index} className="column is-one-third">
-      //           <div className="card">
-      //             <div className="card-content">
-      //               <div style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
-      //                 <b>{dayjs(date.toUTCString()).format('ddd, MMM DD')}</b>
-      //               </div>
-      //               <div>{Math.round(day.temperatureMax)}°C ↑ ({Math.round(day.temperatureMin)}°C ↓)</div>
-      //               <div>
-      //                 <b>POP:</b>
-      //                 <span> </span>
-      //                 <span>{Math.round(day.precipitationProbability)}%</span>
-      //                 <span> </span>
-      //                 {precipitationTypes[day.precipitationType]
-      //                   ? <span>({precipitationTypes[day.precipitationType]})</span>
-      //                   : null
-      //                 }
-      //                 <span> </span>
-      //                 <span>({Math.round(day.precipitationIntensity * 10) / 10}mm/hr)</span>
-      //               </div>
-      //               <div><b>Humidity:</b> {`${Math.round(day.humidity)}%`}</div>
-      //               <div><b>Wind:</b> {degToCompass(day.windDirection)} {Math.round(day.windSpeed * 10) / 10}km/h (Gusts of {Math.round(day.windGust * 10) / 10}km/h)</div>
-      //               <div><b>Cloud Cover:</b> {Math.round(day.cloudCover)}%</div>
-      //             </div>
-      //           </div>
-      //         </div>
-      //       );
-      //     })}
-      //   </div>
+        <div style={{ color: 'white' }}>
+          <span>Weather source: </span>
+          <a
+            href="https://weather.gc.ca/city/pages/ab-39_metric_e.html"
+            style={{ color: 'white', textDecoration: 'underline' }}
+            target="_blank"
+          >https://weather.gc.ca/city/pages/ab-39_metric_e.html</a>
+        </div>
+        
 
-      // </div>
+      </div>
     );
   }
 
