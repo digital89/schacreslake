@@ -10,15 +10,15 @@ const WeatherWidget = () => {
     setLoading(true);
 
     try {
-      axios.get('https://schacreslake.com/.netlify/functions/weather').then(({ data }) => {
+      axios.get('https://www.schacreslake.com/.netlify/functions/weather').then(({ data }) => {
         setLoading(false);
-  
+
         // console.log(data);
 
         const { siteData: { currentConditions, dateTime, forecastGroup, riseSet } } = data;
         const dateTimeObj = dateTime?.[1];
         const date = new Date(`${dateTimeObj?.month?.name} ${dateTimeObj?.day?.$t}, ${dateTimeObj?.year}`);
-  
+
         setWeatherData({
           current: {
             dewpoint: currentConditions?.dewpoint?.$t,
@@ -52,7 +52,7 @@ const WeatherWidget = () => {
       setError(error);
     }
   }, []);
- 
+
   const { current, daily, timeStamp } = weatherData;
   console.log({ current, daily, timeStamp });
 
@@ -137,7 +137,7 @@ const WeatherWidget = () => {
             target="_blank"
           >https://weather.gc.ca/city/pages/ab-39_metric_e.html</a>
         </div>
-        
+
 
       </div>
     );
