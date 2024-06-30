@@ -27,7 +27,7 @@ const WeatherWidget = () => {
             sunrise: `${riseSet?.dateTime[1]?.hour}:${riseSet?.dateTime[1]?.minute}`,
             sunset: `${riseSet?.dateTime[3]?.hour}:${riseSet?.dateTime[3]?.minute}`,
             temperature: currentConditions?.temperature?.$t,
-            windDirection: currentConditions?.wind?.direction,
+            windDirection: currentConditions?.wind?.direction?.$t,
             windGust: currentConditions?.wind?.gust?.$t || 0,
             windSpeed: currentConditions?.wind?.speed?.$t,
           },
